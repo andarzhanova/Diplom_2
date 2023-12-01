@@ -1,6 +1,6 @@
 import requests
 import allure
-from constants import Constants
+from data.urls_constants import UrlsConstants
 
 
 @allure.feature('Получение заказов конкретного пользователя')
@@ -12,7 +12,7 @@ class TestGetUserOrders:
     )
     def test_get_user_orders_authorized_user_success(self, user_token):
         token = user_token
-        response = requests.get(Constants.ORDER, headers={'Authorization': token})
+        response = requests.get(UrlsConstants.ORDER, headers={'Authorization': token})
         assert response.status_code == 200 and response.json()['success']
 
     @allure.title('Проверка получения заказов неавторизованного пользователя')
@@ -22,5 +22,5 @@ class TestGetUserOrders:
     )
     def test_get_user_orders_unauthorized_user_error(self):
         token = None
-        response = requests.get(Constants.ORDER, headers={'Authorization': token})
+        response = requests.get(UrlsConstants.ORDER, headers={'Authorization': token})
         assert response.status_code == 401 and response.text == '{"success":false,"message":"You should be authorised"}'

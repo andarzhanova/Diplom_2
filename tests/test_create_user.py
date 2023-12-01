@@ -2,7 +2,7 @@ import pytest
 import requests
 import allure
 import helpers
-from constants import Constants
+from data.urls_constants import UrlsConstants
 
 
 @allure.feature('Создание пользователя')
@@ -23,7 +23,7 @@ class TestCreateUser:
     )
     def test_create_user_identical_users_error(self, user_data):
         payload = user_data
-        response = requests.post(Constants.CREATE_USER, data=payload)
+        response = requests.post(UrlsConstants.CREATE_USER, data=payload)
         assert response.status_code == 403 and response.text == '{"success":false,"message":"User already exists"}'
 
     @allure.title('Проверка ошибки при создании пользователя без обязательного поля')
@@ -35,6 +35,6 @@ class TestCreateUser:
     def test_create_user_no_required_field_error(self, field):
         payload = helpers.payload
         del payload[field]
-        response = requests.post(Constants.CREATE_USER, data=payload)
+        response = requests.post(UrlsConstants.CREATE_USER, data=payload)
         assert response.status_code == 403
         assert response.text == '{"success":false,"message":"Email, password and name are required fields"}'
