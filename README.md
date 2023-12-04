@@ -7,7 +7,7 @@
 
 Протестированы ручки API для Stellar Burgers
 
-Отчёт в Allure: `allure_results`)
+Отчёт в Allure: (`allure_results`)
 
 ### Запуск автотестов
 
